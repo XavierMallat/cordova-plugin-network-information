@@ -84,11 +84,10 @@
                     } else if ([currentRadioAccessTechnology  isEqualToString:CTRadioAccessTechnologyLTE]) {
                         return @"4g";
                     } 
-                    #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_14_1 
+                    #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_14_1
                     else if (@available(iOS 14.1, *)) {
-                        if ([currentRadioAccessTechnology  isEqualToString:CTRadioAccessTechnologyNRNSA]) {
-                            return @"5g";
-                        } else if ([currentRadioAccessTechnology  isEqualToString:CTRadioAccessTechnologyNR]) {
+                        if ([currentRadioAccessTechnology isEqualToString:CTRadioAccessTechnologyNRNSA] ||
+                            [currentRadioAccessTechnology isEqualToString:CTRadioAccessTechnologyNR]) {
                             return @"5g";
                         }
                     }
@@ -109,7 +108,6 @@
         }
         default:
             return @"unknown";
-    }
 }
 
 - (BOOL)isCellularConnection:(NSString*)theConnectionType
